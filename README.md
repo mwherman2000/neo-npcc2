@@ -62,7 +62,7 @@ PREVIOUS NPC V1.0 PROJECT can be found [here](https://github.com/mwherman2000/ne
 
 ## npcc 1.0 - initial results
 
-* Input NPC Class C#.NPC Source File
+* Input NPC Model Class C#.NPC Source File
 
   ![Input NPC Class](./Docs/images/npcc-v0-parser-point.png)
 
