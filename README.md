@@ -1,5 +1,5 @@
 # neo-npcc
-NEO Persistable Classes (NPC) Compiler (npcc) - Compiler for the NEO Persistable Classes (NPC) Platform
+NEO Persistable Classes (NPC) Compiler 2.1 (npcc) - Compiler for the NEO Persistable Classes (NPC) Platform 2.1
 
 [NEO Blockchain C# Center of Excellence](https://github.com/mwherman2000/neo-csharpcoe/blob/master/README.md)
 
@@ -14,7 +14,7 @@ PREVIOUS NPC V1.0 PROJECT can be found [here](https://github.com/mwherman2000/ne
 ## What is NPC?
 
 * NEO Persistable Classes 
-* Long name: NEO Persistable Class (NPC) Platform 2.0
+* Long name: NEO Persistable Class (NPC) Platform 2.1
 * Byline: An Efficient Entity-based Platform for enterprise application development using .NET/C#, C#.NEO and the NEO Blockchain.
 
 ## What is the subset of C# supported by the NEO compiler and NEO VM?
