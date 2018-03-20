@@ -1,4 +1,4 @@
-# neo-npcc
+# neo-npcc2
 NEO Persistable Classes (NPC) Compiler 2.1 (npcc) - Compiler for the NEO Persistable Classes (NPC) Platform 2.1
 
 [NEO Blockchain C# Center of Excellence](https://github.com/mwherman2000/neo-csharpcoe/blob/master/README.md)
