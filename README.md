@@ -29,7 +29,7 @@ PREVIOUS NPC V1.0 PROJECT can be found [here](https://github.com/mwherman2000/ne
     [![NEO Persistable Classes 1.0: Deep Dive (Video 2 of 3) [Update 1]](https://img.youtube.com/vi/qwteL1BiCjM/1.jpg)](https://github.com/mwherman2000/neo-persistibleclasses/blob/master/Docs/videos/NeoPersistableClasses-Bluepaper%20v0.21-Recording.pdf) 
 
 
-## npcc 2.1 - Autogeneration of NPC Level 0-4 C#.NPC Reusable Entities (Smart Classes)
+## npcc 2.1 - Autogeneration of NPC Level 0-4 Reusable Entities (Smart Classes)
 
 
 ### NPC Platform Architecture: Development and Execution
