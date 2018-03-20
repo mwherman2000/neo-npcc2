@@ -18,6 +18,10 @@ PREVIOUS NPC V1.0 PROJECT can be found [here](https://github.com/mwherman2000/ne
 * Long name: NEO Persistable Class (NPC) Platform 2.1
 * Byline: An Efficient Entity-based Platform for enterprise application development using .NET/C#, C#.NEO and the NEO Blockchain.
 
+## NPC Platform Architecture: Development and Execution
+
+![NPC Architecture](./Docs/images/NPC-architecture-0.1.png)
+
 ## What is the subset of C# supported by the NEO compiler and NEO VM?
 
 * Watch this 20-minute segment of the video: [NEO Persistable Classes 1.0: Deep Dive (Video 2 of 3) [Update 1]](https://www.youtube.com/watch?v=qwteL1BiCjM&t=4m30s) (first 20 minutes starting at timecode [4:30](https://www.youtube.com/watch?v=qwteL1BiCjM&t=4m30s))
