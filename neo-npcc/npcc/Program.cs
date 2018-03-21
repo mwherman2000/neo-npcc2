@@ -163,6 +163,17 @@ namespace npcc
                         if (Trace.Info) Console.WriteLine("**INFO*** NPCFieldInfo:\t\t" + name + ", " + type + ", " + fieldOutputType);
                         break;
                     }
+                case "System.Boolean":
+                    {
+                        fieldClassIndex = classIndex;
+                        fieldInputName = name;
+                        fieldPrivateFieldName = "_" + name.Substring(0, 1).ToLower() + name.Substring(1);
+                        fieldPublicFieldName = name.Substring(0, 1).ToUpper() + name.Substring(1);
+                        fieldInputType = type;
+                        fieldOutputType = "BigInteger";
+                        if (Trace.Info) Console.WriteLine("**INFO*** NPCFieldInfo:\t\t" + name + ", " + type + ", " + fieldOutputType);
+                        break;
+                    }
                 case "System.Numerics.BigInteger":
                     {
                         fieldClassIndex = classIndex;
@@ -197,7 +208,7 @@ namespace npcc
                         break;
                     }
                 default:
-                    {   string message  = "**ERROR** Field type '" + type + "' is not supported in C#.NPC. Use BigInteger, byte[], or string.";
+                    {   string message  = "**ERROR** Field type '" + type + "' is not supported in C#.NPC (NPCFieldInfo). Use BigInteger, byte[], or string.";
                         if (Trace.Error) Console.WriteLine(message);
                         throw new ArgumentOutOfRangeException(fieldInputName, message);
                         //break;
@@ -383,9 +394,9 @@ namespace npcc
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            if (Trace.Splash) Console.WriteLine("*********************************************************");
+            if (Trace.Splash) Console.WriteLine("*************************************************************************");
             if (Trace.Splash) Console.WriteLine(" " + ProgramName + " v" + Assembly.GetEntryAssembly().GetName().Version.ToString());
-            if (Trace.Splash) Console.WriteLine("*********************************************************");
+            if (Trace.Splash) Console.WriteLine("*************************************************************************");
             if (Trace.Splash) Console.WriteLine();
             
             if (args.Length == 1)
@@ -394,8 +405,8 @@ namespace npcc
             }
             else
             {
-                if (Trace.Splash) Console.WriteLine("Usage: " + Assembly.GetEntryAssembly().GetName().Name + " <projectbinfolder>");
-                if (Trace.Splash) Console.WriteLine();
+                if (Trace.Splash) Console.WriteLine("Usage: " + Assembly.GetEntryAssembly().GetName().Name + " <projectBinDebugFolder>");
+                if (Trace.Exit) Console.WriteLine();
                 if (Trace.Exit) Console.WriteLine("Press enter to exit...");
                 if (Trace.Exit) Console.ReadLine();
                 Environment.Exit(0);

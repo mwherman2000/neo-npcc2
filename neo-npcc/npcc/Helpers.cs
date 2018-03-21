@@ -71,6 +71,7 @@ namespace npcc
 
             switch (fieldInputType)
             {
+                case "System.Boolean":
                 case "System.Numerics.BigInteger":
                 case "System.Int32":
                     {
@@ -89,7 +90,7 @@ namespace npcc
                     }
                 default:
                     {
-                        string message = "**ERROR** Field type '" + fieldInputType + "' is not supported in C#.NPC. Use BigInteger, byte[], or string.";
+                        string message = "**ERROR** Field type '" + fieldInputType + "' is not supported in C#.NPC (ZeroByType). Use BigInteger, byte[], or string.";
                         Console.WriteLine(message);
                         throw new ArgumentOutOfRangeException(fieldInputType, message);
                         //break;

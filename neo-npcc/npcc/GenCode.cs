@@ -242,17 +242,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -280,17 +285,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -435,17 +445,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -564,17 +579,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -673,17 +693,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -782,17 +807,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -891,17 +921,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
@@ -1000,17 +1035,22 @@ namespace npcc
                     if (fieldType == "BigInteger")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else if (fieldType == "Int32")
                     {
                         text = text.Replace("#ASBIGINTEGER#", ".AsBigInteger()");
-                        text = text.Replace("#INT32#", "(Int32)");
+                        text = text.Replace("#GETCOERCE#", "(Int32)");
+                    }
+                    else if (fieldType == "string")
+                    {
+                        text = text.Replace("#ASBIGINTEGER#", ".AsString()");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     else
                     {
                         text = text.Replace("#ASBIGINTEGER#", "");
-                        text = text.Replace("#INT32#", "");
+                        text = text.Replace("#GETCOERCE#", "");
                     }
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }

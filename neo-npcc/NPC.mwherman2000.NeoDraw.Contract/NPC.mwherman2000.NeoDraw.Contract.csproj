@@ -230,7 +230,6 @@
     <Compile Include="NeoCounterL3Deletable.cs" />
     <Compile Include="NeoCounterL4CollectibleExt0.cs" />
     <Compile Include="NeoCounterL4CollectibleExt2.cs" />
-    <None Include="NeoCounterL4CustomMethods.cs-x" />
     <Compile Include="NeoEntityModel.cs" />
     <Compile Include="NeoStorageKey.cs" />
     <Compile Include="NeoVersionedAppUser.cs" />
