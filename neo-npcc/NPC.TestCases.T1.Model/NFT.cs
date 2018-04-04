@@ -10,7 +10,8 @@ namespace NPC.TestCases.T1.Model
                         NPCLevel1Managed,
                         NPCLevel2Persistable,
                         NPCLevel3Deletable,
-                        NPCLevel4Collectible
+                        NPCLevel4Collectible,
+                        NPCLevel4CollectibleExt
     {
         readonly string Uri;
         string FirstName;

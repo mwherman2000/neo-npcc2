@@ -1,4 +1,4 @@
-﻿using NPC.Runtime;
+﻿using NPC.Runtime; // Template: NPCLevel4Part1Ext0_cs.txt
 using Neo.SmartContract.Framework;
 using System;
 using System.Collections.Generic;
@@ -32,6 +32,10 @@ namespace #NAMESPACE#
 
             Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
             NeoStorageKey nsk = NeoStorageKey.New(vau, domain, _bClassName);
+
+            #INITONLY#byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, NeoStorageKey.StorageKey(nsk, index, _bSTA));
+            #INITONLY#if (NeoTrace.RUNTIME) TraceRuntime("Get(bkey).#CLASSNAME#.bsta", bsta.Length, bsta);
+            #INITONLY#bool isMissing = false; if (bsta.Length == 0) isMissing = true;
 
             //byte[] bkey;
             e._state = NeoEntityModel.EntityState.PUTTED;

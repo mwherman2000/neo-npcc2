@@ -195,7 +195,7 @@ namespace npcc
                 }
             }
 
-            string comment2B = "// no readonly ";
+            string comment2B = "// no readonly fields ";
             if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
             {
                 comment2B = "";
@@ -228,7 +228,7 @@ namespace npcc
                 }
             }
 
-            string comment2D = "// no readonly ";
+            string comment2D = "// no readonly fields ";
             if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
             {
                 comment2D = "";
@@ -566,6 +566,11 @@ namespace npcc
             text = text.Replace("#CLASSNAME#", "NeoStorageKey");
             File.WriteAllText(targetFullyQualifiedFileName, text);
 
+            string comment4Ext0 = "// no readonly fields ";
+            if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
+            {
+                comment4Ext0 = "";
+            }
             string part1Template = Helpers.GetTextResource(NPCCompilerContext.NPCLevel4Part1Ext0_csName);
             targetFullyQualifiedFileName = ctx.listModuleInfo[0].moduleTargetFullyQualifiedProjectFolder + "\\" +
                                     ctx.listClassInfo[classIndex].classOutputName + NPCLevelsForFileNames.L4CollectibleExt0_cs.ToString().Replace("_cs", ".cs");
@@ -574,6 +579,7 @@ namespace npcc
             part1 = part1.Replace("#NOWDATETIME#", DateTime.Now.ToString());
             part1 = part1.Replace("#NAMESPACE#", ctx.listModuleInfo[0].moduleTargetProjectName);
             part1 = part1.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
+            part1 = part1.Replace("#INITONLY#", comment4Ext0);
             File.WriteAllText(targetFullyQualifiedFileName, part1);
 
             string text4APutElementTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel4APutElementExt0_csName);
@@ -583,8 +589,14 @@ namespace npcc
                 {
                     string fieldPrivateName = f.fieldPrivateFieldName;
                     string fieldPublicName = f.fieldPublicFieldName;
+                    string comment4AExt0 = "";
+                    if (f.fieldIsInitOnly)
+                    {
+                        comment4AExt0 = "if (isMissing) ";
+                    }
                     text = text4APutElementTemplate.Replace("#PUBLICFIELDNAME#", fieldPublicName);
                     text = text.Replace("#PRIVATEFIELDNAME#", fieldPrivateName);
+                    text = text.Replace("#INITONLY#", comment4AExt0);
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
             }
@@ -794,6 +806,11 @@ namespace npcc
             string text = "";
             string targetFullyQualifiedFileName = "";
 
+            string comment4Ext2 = "// no readonly fields ";
+            if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
+            {
+                comment4Ext2 = "";
+            }
             string part1Template = Helpers.GetTextResource(NPCCompilerContext.NPCLevel4Part1Ext2_csName);
             targetFullyQualifiedFileName = ctx.listModuleInfo[0].moduleTargetFullyQualifiedProjectFolder + "\\" +
                                     ctx.listClassInfo[classIndex].classOutputName + NPCLevelsForFileNames.L4CollectibleExt2_cs.ToString().Replace("_cs", ".cs");
@@ -802,6 +819,7 @@ namespace npcc
             part1 = part1.Replace("#NOWDATETIME#", DateTime.Now.ToString());
             part1 = part1.Replace("#NAMESPACE#", ctx.listModuleInfo[0].moduleTargetProjectName);
             part1 = part1.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
+            part1 = part1.Replace("#INITONLY#", comment4Ext2);
             File.WriteAllText(targetFullyQualifiedFileName, part1);
 
             string text4APutElementTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel4APutElementExt2_csName);
@@ -811,8 +829,14 @@ namespace npcc
                 {
                     string fieldPrivateName = f.fieldPrivateFieldName;
                     string fieldPublicName = f.fieldPublicFieldName;
+                    string comment4AExt2 = "";
+                    if (f.fieldIsInitOnly)
+                    {
+                        comment4AExt2 = "if (isMissing) ";
+                    }
                     text = text4APutElementTemplate.Replace("#PUBLICFIELDNAME#", fieldPublicName);
                     text = text.Replace("#PRIVATEFIELDNAME#", fieldPrivateName);
+                    text = text.Replace("#INITONLY#", comment4AExt2);
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
             }

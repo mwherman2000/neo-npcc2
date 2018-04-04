@@ -59,12 +59,15 @@
     <Compile Include="NFTL1Managed.cs" />
     <Compile Include="NFTL2Persistable.cs" />
     <Compile Include="NFTL3Deletable.cs" />
+    <Compile Include="NFTL4CollectibleExt0.cs" />
+    <Compile Include="NFTL4CollectibleExt2.cs" />
     <Compile Include="PointL0Basic.cs" />
     <Compile Include="PointL1Managed.cs" />
     <Compile Include="PointL2Persistable.cs" />
     <Compile Include="PointL3Deletable.cs" />
     <Compile Include="PointL4CollectibleExt0.cs" />
     <Compile Include="PointL4CollectibleExt2.cs" />
+    <Compile Include="PointL4CustomMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

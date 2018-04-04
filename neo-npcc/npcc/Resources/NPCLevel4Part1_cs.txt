@@ -1,4 +1,4 @@
-﻿using NPC.Runtime;
+﻿using NPC.Runtime; // Template: NPCLevel4Part1Ext0_cs.txt
 using Neo.SmartContract.Framework;
 using System;
 using System.Collections.Generic;
