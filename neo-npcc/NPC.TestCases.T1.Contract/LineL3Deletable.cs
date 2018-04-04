@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// NPC.TestCases.T1.Contract.Line - Level 3 Deletable
 ///
-/// Processed:      2018-03-19 10:56:31 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v1.0.0.0
+/// Processed:      2018-04-04 12:32:46 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v2.1.0.22579
 /// NPC Project:    https://github.com/mwherman2000/neo-npcc2/blob/master/README.md
 /// NPC Lead:       Michael Herman (Toronto) (mwherman@parallelspace.net)
 /// </summary>

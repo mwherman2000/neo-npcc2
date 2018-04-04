@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// NPC.TestCases.T1.Contract.Point - Level 1 Managed
 ///
-/// Processed:       2018-03-19 10:56:31 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v1.0.0.0
+/// Processed:       2018-04-04 12:32:46 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v2.1.0.22579
 /// NPC Project:     https://github.com/mwherman2000/neo-npcc2/blob/master/README.md
 /// NPC Lead:        Michael Herman (Toronto) (mwherman@parallelspace.net)
 /// </summary>
@@ -34,7 +34,7 @@ namespace NPC.TestCases.T1.Contract
                                { e._y = value; e._state = NeoEntityModel.EntityState.SET; }
         public static BigInteger GetY(Point e) { return e._y; }
         public static void Set(Point e, BigInteger X, BigInteger Y) // Template: NPCLevel1Set_cs.txt
-                                { e._x = X; e._y = Y;  e._state = NeoEntityModel.EntityState.SET; }        
+                                { {e._x = X; e._y = Y;  e._state = NeoEntityModel.EntityState.SET;} }        
         // Factory methods // Template: NPCLevel1Part2_cs.txt
         private static Point _Initialize(Point e)
         {

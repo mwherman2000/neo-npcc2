@@ -54,7 +54,13 @@ namespace npcc
                 {
                     string fieldName = f.fieldPrivateFieldName;
                     string fieldType = f.fieldOutputType;
-                    text2 += "        " + "private" + "\t" + fieldType + "\t" + fieldName + ";\r\n";
+                    bool isInitOnly = f.fieldIsInitOnly;
+                    string comment0 = "";
+                    if (isInitOnly)
+                    {
+                        comment0 = "\t/* readonly entity field */";
+                    }
+                    text2 += "        " + "private" + "\t" + fieldType + "\t" + fieldName + ";" + comment0 + "\r\n";
                 }
             }
 
@@ -102,22 +108,33 @@ namespace npcc
 
                     allFieldArgs += "e." + fieldPrivateName + ", ";
 
+                    string comment1SetXGetX = "";
+                    if (f.fieldIsInitOnly)
+                    {
+                        comment1SetXGetX = "// readonly ";
+                    }
+
                     textSetXGetX = textSetXGetXTemplate.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
                     textSetXGetX = textSetXGetX.Replace("#FIELDTYPE#", fieldType);
                     textSetXGetX = textSetXGetX.Replace("#PUBLICFIELDNAME#", fieldPublicName);
                     textSetXGetX = textSetXGetX.Replace("#PRIVATEFIELDNAME#", fieldPrivateName);
+                    textSetXGetX = textSetXGetX.Replace("#INITONLY#", comment1SetXGetX);
                     File.AppendAllText(targetFullyQualifiedFileName, textSetXGetX);
                 }
             }
 
-            // #CLASSNAME#, #ALLFIELDPARAMETERS#, #ALLFIELDASSIGNMENTS#
+            string comment1Set = "";
+            if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
+            {
+                comment1Set = "if (e._state != NeoEntityModel.EntityState.NULL) ";
+            }
             string textSetTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel1Set_csName);
             string textSet = textSetTemplate.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
             textSet = textSet.Replace("#ALLFIELDPARAMETERS#", allFieldParameters.Substring(0,allFieldParameters.Length-2)); // drop last ", "
             textSet = textSet.Replace("#ALLFIELDASSIGNMENTS#", allFieldAssignments);
+            textSet = textSet.Replace("#INITONLY#", comment1Set);
             File.AppendAllText(targetFullyQualifiedFileName, textSet);
 
-            // # CLASSNAME#, #ALLFIELDSASSIGNEDZERO#, #ALLFIELDASSIGNMENTS#, #ALLFIELDARGS#
             string text2Template = Helpers.GetTextResource(NPCCompilerContext.NPCLevel1Part2_csName);
             string text2 = text2Template.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
             text2 = text2.Replace("#ALLFIELDPARAMETERS#", allFieldParameters.Substring(0, allFieldParameters.Length - 2)); // drop last ", "
@@ -178,12 +195,18 @@ namespace npcc
                 }
             }
 
+            string comment2B = "// no readonly ";
+            if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
+            {
+                comment2B = "";
+            }
             string text2bMissingTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel2BMissing_csName);
             text = text2bMissingTemplate.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
             text = text.Replace("#ALLFIELDPARAMETERS#", allFieldParameters.Substring(0, allFieldParameters.Length - 2)); // drop last ", "
             text = text.Replace("#ALLFIELDSASSIGNEDZERO#", allFieldsAssignedZero);
             text = text.Replace("#ALLFIELDASSIGNMENTS#", allFieldAssignments);
             text = text.Replace("#ALLFIELDARGS#", allFieldArgs.Substring(0, allFieldArgs.Length - 2)); // drop last ", "
+            text = text.Replace("#INITONLY#", comment2B);
             File.AppendAllText(targetFullyQualifiedFileName, text);
             
             string text2CPutTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel2CPut_csName);
@@ -193,18 +216,30 @@ namespace npcc
                 {
                     string fieldPrivateName = f.fieldPrivateFieldName;
                     string fieldPublicName = f.fieldPublicFieldName;
+                    string comment2C = "";
+                    if (f.fieldIsInitOnly)
+                    {
+                        comment2C = "if (isMissing) ";
+                    }
                     text = text2CPutTemplate.Replace("#PUBLICFIELDNAME#", fieldPublicName);
                     text = text.Replace("#PRIVATEFIELDNAME#", fieldPrivateName);
+                    text = text.Replace("#INITONLY#", comment2C);
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
             }
 
+            string comment2D = "// no readonly ";
+            if (ctx.listClassInfo[classIndex].hasFieldIsInitOnly)
+            {
+                comment2D = "";
+            }
             string text2DPutTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel2DPut_csName);
             text = text2DPutTemplate.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
             text = text.Replace("#ALLFIELDPARAMETERS#", allFieldParameters.Substring(0, allFieldParameters.Length - 2)); // drop last ", "
             text = text.Replace("#ALLFIELDSASSIGNEDZERO#", allFieldsAssignedZero);
             text = text.Replace("#ALLFIELDASSIGNMENTS#", allFieldAssignments);
             text = text.Replace("#ALLFIELDARGS#", allFieldArgs.Substring(0, allFieldArgs.Length - 2)); // drop last ", "
+            text = text.Replace("#INITONLY#", comment2D);
             File.AppendAllText(targetFullyQualifiedFileName, text);
 
             string text2EPutTemplate = Helpers.GetTextResource(NPCCompilerContext.NPCLevel2EPut_csName);
@@ -214,8 +249,14 @@ namespace npcc
                 {
                     string fieldPrivateName = f.fieldPrivateFieldName;
                     string fieldPublicName = f.fieldPublicFieldName;
+                    string comment2E = "";
+                    if (f.fieldIsInitOnly)
+                    {
+                        comment2E = "if (isMissing) ";
+                    }
                     text = text2EPutTemplate.Replace("#PUBLICFIELDNAME#", fieldPublicName);
                     text = text.Replace("#PRIVATEFIELDNAME#", fieldPrivateName);
+                    text = text.Replace("#INITONLY#", comment2E);
                     File.AppendAllText(targetFullyQualifiedFileName, text);
                 }
             }
@@ -1143,8 +1184,8 @@ namespace npcc
                 text = text.Replace(ctx.listModuleInfo[0].moduleModelClassProjectName, "#NAMESPACE#");
                 text = text.Replace("#NAMESPACE#", ctx.listModuleInfo[0].moduleTargetProjectName);
                 text = text.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
-                text = text.Replace(ctx.listClassInfo[classIndex].classOutputName + ":", ctx.listClassInfo[classIndex].classOutputName); // Replace ':' too
-                text = text.Replace(cii.interfaceOutputName, "");
+                //text = text.Replace(ctx.listClassInfo[classIndex].classOutputName + " :", ctx.listClassInfo[classIndex].classOutputName); // Replace ':' too // TODO multiple spaces
+                text = text.Replace(": " + cii.interfaceOutputName, "");
                 File.WriteAllText(targetFullyQualifiedFileName, text);
 
                 string classModelFullyQualifiedFileNameI = classModelFullyQualifiedFileName + "i"; // C# implementation file from project
@@ -1160,8 +1201,8 @@ namespace npcc
                     text = text.Replace(ctx.listModuleInfo[0].moduleModelClassProjectName, "#NAMESPACE#");
                     text = text.Replace("#NAMESPACE#", ctx.listModuleInfo[0].moduleTargetProjectName);
                     text = text.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
-                    text = text.Replace(ctx.listClassInfo[classIndex].classOutputName + ":", ctx.listClassInfo[classIndex].classOutputName); // Replace ':' too
-                    text = text.Replace(cii.interfaceOutputName, "");
+                    //text = text.Replace(ctx.listClassInfo[classIndex].classOutputName + " :", ctx.listClassInfo[classIndex].classOutputName); // Replace ':' too // TODO multiple spaces
+                    text = text.Replace(": " + cii.interfaceOutputName, "");
                     File.WriteAllText(targetFullyQualifiedFileName, text);
                 }
             }

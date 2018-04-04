@@ -122,6 +122,7 @@ namespace npcc
         public string classInputName;
         public string classOutputName;
         public string classNamespace;
+        public bool hasFieldIsInitOnly;
 
         public NPCClassInfo(string name, string snamespace)
         {
@@ -131,6 +132,7 @@ namespace npcc
             classInputName = name;
             classOutputName = name.Substring(0, 1).ToUpper() + name.Substring(1);
             classNamespace = snamespace;
+            hasFieldIsInitOnly = false;
 
             if (Trace.Info) Console.WriteLine("**INFO*** NPCClassInfo:\t" + name + " " + snamespace);
         }
@@ -139,16 +141,19 @@ namespace npcc
     public class NPCFieldInfo
     {
         public int fieldClassIndex;
+        public bool fieldIsInitOnly;
         public string fieldInputName; // x
         public string fieldPrivateFieldName; // _x
         public string fieldPublicFieldName; // X
         public string fieldInputType;
         public string fieldOutputType;
 
-        public NPCFieldInfo(string name, string type, int classIndex)
+        public NPCFieldInfo(string name, string type, bool isInitOnly, int classIndex)
         {
             Debug.Assert(!String.IsNullOrEmpty(name), "name");
             Debug.Assert(!String.IsNullOrEmpty(type), "type");
+
+            fieldIsInitOnly = isInitOnly;
 
             switch (type)
             {
@@ -280,6 +285,7 @@ namespace npcc
 
     public class NPCCompilerContext
     {
+        public const string mscorlibDllName = "mscorlib.dll";
         public const string NeoConvertTaskDllName = "Neo.ConvertTask.dll";
 
         public const string NeoEntityModel_csName = "NeoEntityModel_cs.txt";
@@ -630,7 +636,7 @@ namespace npcc
                     if (Trace.Verbose) Console.WriteLine("Type Interfaces...");
                     foreach (var i in t.Interfaces)
                     {
-                        if (Trace.Verbose) Console.WriteLine("    Field Name:\t" + i.Name);
+                        if (Trace.Verbose) Console.WriteLine("    Interface Name:\t" + i.Name);
                         if (Trace.Verbose) Console.WriteLine("      f.Fullname:\t" + i.FullName);
                         //if (Trace.Verbose) Console.WriteLine("      f.Module.FullyQualifiedName:\t" + i.Module.FullyQualifiedName);
                         if (Trace.Verbose) Console.WriteLine("      f.DeclaringType:\t" + (i.DeclaringType == null ? "<null>" : i.DeclaringType.ToString()));
@@ -649,6 +655,7 @@ namespace npcc
                         //if (Trace.Verbose) Console.WriteLine("      f.Module.FullyQualifiedName:\t" + f.Module.FullyQualifiedName);
                         if (Trace.Verbose) Console.WriteLine("      f.DeclaringType:\t" + f.DeclaringType.ToString());
                         if (Trace.Verbose) Console.WriteLine("      f.FieldType:\t" + f.FieldType.ToString());
+                        if (Trace.Verbose) Console.WriteLine("      f.IsInitOnly:\t" + f.IsInitOnly.ToString());
                         if (Trace.Verbose) Console.WriteLine("      f.IsPrivate:\t" + f.IsPrivate.ToString());
                         if (Trace.Verbose) Console.WriteLine("      f.IsPublic:\t" + f.IsPublic.ToString());
                         if (Trace.Verbose) Console.WriteLine("      f.HasConstant:\t" + f.HasConstant.ToString());
@@ -667,7 +674,11 @@ namespace npcc
 
                         if (t.IsClass & t.Name != "<Module>")
                         {
-                            ctx.listFieldInfo.Add(new NPCFieldInfo(f.Name, f.FieldType.ToString(), classIndex));
+                            ctx.listFieldInfo.Add(new NPCFieldInfo(f.Name, f.FieldType.ToString(), f.IsInitOnly, classIndex));
+                            if (f.IsInitOnly)
+                            {
+                                ctx.listClassInfo[classIndex].hasFieldIsInitOnly = true;
+                            }
                         }
                     }
 
@@ -859,19 +870,16 @@ namespace npcc
             // Scaffolding: Assume the developer has created an empty NeoContract C# project with the name "NPC" + className + "dApp"
             DirectoryInfo di = new DirectoryInfo(ctx.listModuleInfo[0].moduleTargetFullyQualifiedProjectFolder);
             FileInfo[] files = di.GetFiles("*.dll");
+            bool foundNeoConvertTaskDllName = false;
+            bool foundmscorlibDllName = false;
             foreach (FileInfo fi in files)
             {
-                if (Trace.Info) Console.WriteLine("**INFO*** ValidateEnvironment:\t" + fi.FullName);
+                if (Trace.Info) Console.WriteLine("**INFO*** ValidateTargetProjectEnvironment:\t" + fi.FullName);
+                if (fi.Name == NPCCompilerContext.NeoConvertTaskDllName) foundNeoConvertTaskDllName = true;
+                if (fi.Name == NPCCompilerContext.mscorlibDllName) foundmscorlibDllName = true;
             }
 
-            if (files.Length != 1)
-            {
-                string message = "**ERROR** Project needs to be a standard NeoContract project with containing 1 DLL in the project folder. Not " + files.Length.ToString();
-                if (Trace.Error) Console.WriteLine(message);
-                success = false;
-            }
-
-            if (files[0].Name != NPCCompilerContext.NeoConvertTaskDllName)
+            if (!foundNeoConvertTaskDllName)
             {
                 string message = "**ERROR** Project needs to be a standard NeoContract project with containing " + NPCCompilerContext.NeoConvertTaskDllName + ". Not " + files[0].Name;
                 if (Trace.Error) Console.WriteLine(message);

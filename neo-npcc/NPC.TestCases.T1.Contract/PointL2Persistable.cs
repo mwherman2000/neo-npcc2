@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// NPC.TestCases.T1.Contract.Point - Level 2 Persistable
 ///
-/// Processed:       2018-03-19 10:56:31 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v1.0.0.0
+/// Processed:       2018-04-04 12:32:46 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v2.1.0.22579
 /// NPC Project:     https://github.com/mwherman2000/neo-npcc2/blob/master/README.md
 /// NPC Lead:        Michael Herman (Toronto) (mwherman@parallelspace.net)
 /// </summary>
@@ -59,6 +59,10 @@ namespace NPC.TestCases.T1.Contract
             Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
             byte[] _bkeyTag = Helper.Concat(key, _bclassKeyTag);
 
+            // no readonly byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bSTA));
+            // no readonly if (NeoTrace.RUNTIME) TraceRuntime("Put(bkey).bsta", bsta.Length, bsta);
+            // no readonly bool isMissing = false; if (bsta.Length == 0) isMissing = true;
+
             e._state = NeoEntityModel.EntityState.PUTTED;
             Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bSTA), e._state.AsBigInteger());
 
@@ -76,6 +80,10 @@ namespace NPC.TestCases.T1.Contract
             Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
             string _skeyTag = key + _classKeyTag;
             if (NeoTrace.RUNTIME) TraceRuntime("Put(skey)._skeyTag", _skeyTag);
+
+            // no readonly byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sSTA);
+            // no readonly if (NeoTrace.RUNTIME) TraceRuntime("Put(skey).bsta", bsta.Length, bsta);
+            // no readonly bool isMissing = false; if (bsta.Length == 0) isMissing = true;
 
             e._state = NeoEntityModel.EntityState.PUTTED;
             BigInteger bis = e._state.AsBigInteger();

@@ -55,6 +55,10 @@
     <Compile Include="NeoStorageKey.cs" />
     <Compile Include="NeoTrace.cs" />
     <Compile Include="NeoVersionedAppUser.cs" />
+    <Compile Include="NFTL0Basic.cs" />
+    <Compile Include="NFTL1Managed.cs" />
+    <Compile Include="NFTL2Persistable.cs" />
+    <Compile Include="NFTL3Deletable.cs" />
     <Compile Include="PointL0Basic.cs" />
     <Compile Include="PointL1Managed.cs" />
     <Compile Include="PointL2Persistable.cs" />
