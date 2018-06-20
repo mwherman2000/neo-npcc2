@@ -35,7 +35,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// NPC.Runtime.NeoEntityModel
 ///
-/// Processed:       2018-04-04 1:42:08 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v2.1.0.24661
+/// Processed:       2018-04-06 1:24:04 PM by npcc - NEO Persistable Classes (NPC) Platform 2.1 Compiler v2.1.0.24661
 /// NPC Project:     https://github.com/mwherman2000/neo-npcc2/blob/master/README.md
 /// NPC Lead:        Michael Herman (Toronto) (mwherman@parallelspace.net)
 /// </summary>

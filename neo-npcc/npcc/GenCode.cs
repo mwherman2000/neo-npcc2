@@ -1212,7 +1212,7 @@ namespace npcc
                 text = text.Replace(": " + cii.interfaceOutputName, "");
                 File.WriteAllText(targetFullyQualifiedFileName, text);
 
-                string classModelFullyQualifiedFileNameI = classModelFullyQualifiedFileName + "i"; // C# implementation file from project
+                string classModelFullyQualifiedFileNameI = classModelFullyQualifiedFileName + "i"; // C# implementation .csi file from project
                 if (File.Exists(classModelFullyQualifiedFileNameI))
                 {
                     if (Trace.Warning) Console.WriteLine("**INFO*** Replacing template with custom methods implementation found in model class project.\t" + classModelFullyQualifiedFileName);
@@ -1223,6 +1223,7 @@ namespace npcc
                     text = text.Replace("#PROGRAMVERSION#", Assembly.GetEntryAssembly().GetName().Version.ToString());
                     text = text.Replace("#NOWDATETIME#", DateTime.Now.ToString());
                     text = text.Replace(ctx.listModuleInfo[0].moduleModelClassProjectName, "#NAMESPACE#");
+                    text = text.Replace(ctx.listClassInfo[0].classNamespace, "#NAMESPACE#"); // assume .csi namespace is the same as the class's namespace
                     text = text.Replace("#NAMESPACE#", ctx.listModuleInfo[0].moduleTargetProjectName);
                     text = text.Replace("#CLASSNAME#", ctx.listClassInfo[classIndex].classOutputName);
                     //text = text.Replace(ctx.listClassInfo[classIndex].classOutputName + " :", ctx.listClassInfo[classIndex].classOutputName); // Replace ':' too // TODO multiple spaces
